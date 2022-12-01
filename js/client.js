@@ -22,22 +22,22 @@ const append = (message, position)=>{
 
 
 // Ask new user for his/her name and let the server know
-const name = prompt("Enter your name to join");
-socket.emit('new-user-joined', name);
+const username = prompt("Enter your name to join");
+socket.emit('new-user-joined', username);
 
 // If a new user joins, receive his/her name from the server
-socket.on('user-joined', name =>{
-    append(`${name} joined the chat`, 'right')
+socket.on('user-joined', username =>{
+    append(`${username} joined the chat`, 'right')
 })
 
 // If server sends a message, receive it
 socket.on('receive', data =>{
-    append(`${data.name}: ${data.message}`, 'left')
+    append(`${data.username}: ${data.message}`, 'left')
 })
 
 // If a user leaves the chat, append the info to the container
-socket.on('left', name =>{
-    append(`${name} left the chat`, 'right')
+socket.on('left', username =>{
+    append(`${username} left the chat`, 'right')
 })
 
 // If the form gets submitted, send server the message
